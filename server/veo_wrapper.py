@@ -11,9 +11,9 @@ class VeoGenerator:
         self.client = genai.Client(api_key=gemini_key)
 
 
-    def generateVideo(self, character_name, dialogue_text, video_style, chunk_i):
+    def generateVideo(self, character_name, personality, voice, dialogue_text, video_style, chunk_i):
         prompt = f"""Generate a video with the following parameters,
-        subject: {character_name} narrating the dialogue
+        subject: {character_name} narrating the dialogue with a {personality} personality, and a {voice} voice
         dialogue: {dialogue_text}
         style: {video_style}
         """

@@ -16,6 +16,10 @@ def generate_video():
     if 'file' not in request.files:
         return jsonify({'error': 'No File uploaded'}), 400
     uploaded_file = request.files['file']
+    questionToAnswer = request.form.get("question")
+    character_name = request.form.get("character_name")
+    personality = request.form.get("character_personality")
+    voice_style = request.form.get("voice_style")
         # Check file type
     if uploaded_file.filename.endswith('.pdf'):
         # Extract text from PDF
@@ -38,14 +42,14 @@ def generate_video():
             ]
             There should be at max 4 summaries, which will equal 24 seconds of speaking
         """,
-        question="What is polymorphism"
+        question=questionToAnswer
         )
         segments = json.loads(summary)
         video_files = []
         for i, seg in enumerate(segments, 1):
             text = seg["segment"]
             veo = VeoGenerator()
-            veo.generateVideo("Hello Kitty", text, "Infographic style with clear diagrams and bright colors and minimal text", i)
+            veo.generateVideo(character_name, personality, voice_style, text, "Infographic style with clear diagrams and bright colors and minimal text", i)
             video_files.append(f"{i}_video_explanation.mp4")
             # print(f"Segment {i}: {text}")
         combine_videos(video_files) # feed in something for second argument at a later point to differentiate all the files being created

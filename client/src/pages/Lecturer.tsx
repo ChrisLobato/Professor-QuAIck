@@ -18,8 +18,9 @@ const Lecturer = () => {
   const [videoDialogOpen, setVideoDialogOpen] = useState(false);
   
   // Form data
-  const [lectureContent, setLectureContent] = useState("");
+  const [question, setQuestion] = useState("");
   const [uploadedFileName, setUploadedFileName] = useState("");
+  const [fileToUpload, setFileToUpload] = useState(null);
   const [characterName, setCharacterName] = useState("");
   const [characterPersonality, setCharacterPersonality] = useState("");
   const [characterVoice, setCharacterVoice] = useState("");
@@ -33,17 +34,17 @@ const Lecturer = () => {
     if (!file) return;
 
     setUploadedFileName(file.name);
-    
-    const formData = new FormData();
-    formData.append("file", file);
-    const response = await fetch("http://localhost:5000/generate", {
-      method: "POST",
-      body: formData,
-    });
-    if (!response.ok) throw new Error("Upload failed");
+    setFileToUpload(file);
+    // const formData = new FormData();
+    // formData.append("file", file);
+    // const response = await fetch("http://localhost:5000/generate", {
+    //   method: "POST",
+    //   body: formData,
+    // });
+    // if (!response.ok) throw new Error("Upload failed");
 
-    const data = await response.json();
-    console.log(data);
+    // const data = await response.json();
+    // console.log(data);
 
     //post request with formData in the body
     //putting post request here just to test
@@ -88,18 +89,43 @@ const Lecturer = () => {
     setCharacterDialogOpen(false);
     setIsGenerating(true);
     
-    // Simulate video generation (replace with actual Sora AI call)
-    setTimeout(() => {
-      // Mock video URL - in production this would be the actual generated video
-      setGeneratedVideoUrl("https://www.w3schools.com/html/mov_bbb.mp4");
-      setIsGenerating(false);
-      setVideoDialogOpen(true);
-      
-      toast({
-        title: "Video generated!",
-        description: "Your AI lecture video is ready.",
-      });
-    }, 3000);
+    // Backend call to generate video
+     try {
+    // Build form data for both file + other params
+    const formData = new FormData();
+    formData.append("file", fileToUpload);
+    formData.append("question",question);
+    formData.append("character_name", characterName);
+    formData.append("character_personality", characterPersonality);
+    formData.append("voice_style", characterVoice);
+
+    const response = await fetch("http://localhost:5000/generate", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error(`Upload failed: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    console.log("🎥 Video generation started:", data);
+
+    toast({
+      title: "Generating video...",
+      description: "Your lecture video is being created. This may take a moment.",
+    });
+  } catch (error) {
+    console.error("Error generating video:", error);
+    toast({
+      title: "Error generating video",
+      description: error.message,
+      variant: "destructive",
+    });
+  } finally {
+    setIsGenerating(false);
+  }
+    
   };
 
   return (
@@ -206,23 +232,17 @@ const Lecturer = () => {
               </div>
             )}
 
-            {/* <div className="relative">
-              <p className="text-sm text-muted-foreground mb-2">Or paste notes directly:</p>
+            <div className="relative">
+              <p className="text-sm text-muted-foreground mb-2">Ask Question about lecture notes for AI to answer:</p>
               <Textarea
-                placeholder="Paste your lecture notes here..."
+                placeholder="Enter your question here..."
                 className="min-h-[250px] bg-background/50"
-                value={lectureContent}
-                onChange={(e) => setLectureContent(e.target.value)}
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
               />
-            </div> */}
+            </div>
 
-            {lectureContent && (
-              <div className="p-3 bg-accent/10 rounded-lg border border-accent/30">
-                <p className="text-xs text-muted-foreground">
-                  {lectureContent.length} characters loaded
-                </p>
-              </div>
-            )}
+            
           </div>
 
           <div className="flex justify-end gap-2">
@@ -324,7 +344,7 @@ const Lecturer = () => {
           <div className="flex justify-end gap-2">
             <Button variant="outline" onClick={() => {
               setVideoDialogOpen(false);
-              setLectureContent("");
+              setQuestion("");
               setUploadedFileName("");
               setCharacterName("");
               setCharacterPersonality("");
