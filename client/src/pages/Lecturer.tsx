@@ -28,26 +28,41 @@ const Lecturer = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedVideoUrl, setGeneratedVideoUrl] = useState("");
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     setUploadedFileName(file.name);
     
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const text = event.target?.result as string;
-      setLectureContent(text);
-      toast({
-        title: "File uploaded!",
-        description: `${file.name} has been loaded successfully.`,
-      });
-    };
-    reader.readAsText(file);
+    const formData = new FormData();
+    formData.append("file", file);
+    const response = await fetch("http://localhost:5000/generate", {
+      method: "POST",
+      body: formData,
+    });
+    if (!response.ok) throw new Error("Upload failed");
+
+    const data = await response.json();
+    console.log(data);
+
+    //post request with formData in the body
+    //putting post request here just to test
+
+
+    // const reader = new FileReader();
+    // reader.onload = (event) => {
+    //   const text = event.target?.result as string;
+    //   setLectureContent(text);
+    //   toast({
+    //     title: "File uploaded!",
+    //     description: `${file.name} has been loaded successfully.`,
+    //   });
+    // };
+    // reader.readAsText(file);
   };
 
   const handleNotesSubmit = () => {
-    if (!lectureContent.trim()) {
+    if (!uploadedFileName.trim()) {
       toast({
         title: "No content",
         description: "Please upload or paste lecture notes.",
@@ -191,7 +206,7 @@ const Lecturer = () => {
               </div>
             )}
 
-            <div className="relative">
+            {/* <div className="relative">
               <p className="text-sm text-muted-foreground mb-2">Or paste notes directly:</p>
               <Textarea
                 placeholder="Paste your lecture notes here..."
@@ -199,7 +214,7 @@ const Lecturer = () => {
                 value={lectureContent}
                 onChange={(e) => setLectureContent(e.target.value)}
               />
-            </div>
+            </div> */}
 
             {lectureContent && (
               <div className="p-3 bg-accent/10 rounded-lg border border-accent/30">
