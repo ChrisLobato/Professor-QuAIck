@@ -123,7 +123,7 @@ const Lecturer = () => {
           <div className="flex items-center gap-3">
             <img src={professorMascot} alt="Professor" className="w-12 h-12" />
             <h1 className="text-2xl font-bold">
-              <span className="text-primary">AI</span> Lecturer
+              Prof.Qu<span className="text-primary">AI</span>ck
             </h1>
           </div>
           <Button variant="ghost" onClick={() => navigate("/")} className="gap-2">
@@ -133,6 +133,16 @@ const Lecturer = () => {
         </div>
       </header>
 
+      <section
+        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+        style={{
+          // backgroundImage: `linear-gradient(to bottom, rgba(33, 42, 52, 0.95), rgba(33, 42, 52, 0.85)), url(${heroBackground})`,
+          background: "radial-gradient(circle at top, #1e3a8a, #0f172a)",
+          // backgroundImage: `linear-gradient(to bottom right, rgba(204, 255, 204, 0.95), rgba(224, 255, 229, 0.9), rgba(230, 250, 255, 0.8))`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
       {/* Main Content */}
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto text-center space-y-8">
@@ -174,7 +184,7 @@ const Lecturer = () => {
           )}
         </div>
       </div>
-
+      </section>
       {/* Lecture Notes Dialog */}
       <Dialog open={notesDialogOpen} onOpenChange={setNotesDialogOpen}>
         <DialogContent className="max-w-2xl">
