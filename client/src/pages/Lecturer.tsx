@@ -109,12 +109,24 @@ const Lecturer = () => {
     }
 
     const data = await response.json();
-    console.log("🎥 Video generation started:", data);
+    console.log("🎥 Video generation result:", data);
 
-    toast({
-      title: "Generating video...",
-      description: "Your lecture video is being created. This may take a moment.",
-    });
+    if (data.video_url) {
+      setGeneratedVideoUrl(data.video_url);
+      setVideoDialogOpen(true);
+
+      toast({
+        title: "Video Ready!",
+        description: "Your AI lecture video has been generated successfully.",
+      });
+    } else {
+      toast({
+        title: "No video returned",
+        description: "Something went wrong — please try again.",
+        variant: "destructive",
+      });
+    }
+
   } catch (error) {
     console.error("Error generating video:", error);
     toast({
