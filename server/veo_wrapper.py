@@ -3,7 +3,6 @@ from google import genai
 from google.genai import types
 import os
 from dotenv import load_dotenv
-# AIzaSyDW6ZrDD-QTYDIomRYu2Q4rQzNkxTjUB5A
 load_dotenv()
 
 class VeoGenerator:
