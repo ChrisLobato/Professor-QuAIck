@@ -4,6 +4,7 @@ import io
 import json
 
 from pdf_extractor import extract_text_and_images
+from pdf_extractor import combine_videos
 from gpt_analyzer import GPTAnalyzer
 from veo_wrapper import VeoGenerator
 
@@ -40,12 +41,14 @@ def generate_video():
         question="What is polymorphism"
         )
         segments = json.loads(summary)
+        video_files = []
         for i, seg in enumerate(segments, 1):
             text = seg["segment"]
             veo = VeoGenerator()
             veo.generateVideo("Hello Kitty", text, "Infographic style with clear diagrams and bright colors and minimal text", i)
+            video_files.append(f"{i}_video_explanation.mp4")
             # print(f"Segment {i}: {text}")
-        
+        combine_videos(video_files) # feed in something for second argument at a later point to differentiate all the files being created
     else:
         # Fallback: treat as plain text
         text = uploaded_file.read().decode('utf-8', errors='ignore')
