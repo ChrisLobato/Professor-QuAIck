@@ -109,3 +109,24 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes shooting-star-fall {
+  0% {
+    transform: translateY(0) rotate(45deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(400px) rotate(45deg); /* move down */
+    opacity: 0;
+  }
+}
+
+.shooting-star {
+  position: absolute;
+  width: 2px;
+  height: 50px;
+  background: linear-gradient(45deg, hsl(0 0% 100%), transparent);
+  border-radius: 9999px;
+  animation: shooting-star-fall linear infinite;
+}
+
