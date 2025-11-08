@@ -35,31 +35,6 @@ const Lecturer = () => {
 
     setUploadedFileName(file.name);
     setFileToUpload(file);
-    // const formData = new FormData();
-    // formData.append("file", file);
-    // const response = await fetch("http://localhost:5000/generate", {
-    //   method: "POST",
-    //   body: formData,
-    // });
-    // if (!response.ok) throw new Error("Upload failed");
-
-    // const data = await response.json();
-    // console.log(data);
-
-    //post request with formData in the body
-    //putting post request here just to test
-
-
-    // const reader = new FileReader();
-    // reader.onload = (event) => {
-    //   const text = event.target?.result as string;
-    //   setLectureContent(text);
-    //   toast({
-    //     title: "File uploaded!",
-    //     description: `${file.name} has been loaded successfully.`,
-    //   });
-    // };
-    // reader.readAsText(file);
   };
 
   const handleNotesSubmit = () => {
@@ -271,9 +246,9 @@ const Lecturer = () => {
           
           <div className="space-y-4 py-4">
             <div className="space-y-2">
-              <label className="text-sm font-medium">Character Name</label>
+              <label className="text-sm font-medium">Character</label>
               <Input
-                placeholder="e.g., Professor Smith, Dr. Lee..."
+                placeholder="e.g., Hello Kitty, Chiikawa..."
                 value={characterName}
                 onChange={(e) => setCharacterName(e.target.value)}
                 className="bg-background/50"
