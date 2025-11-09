@@ -11,34 +11,34 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section 
+      <section
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
         style={{
-         // backgroundImage: `linear-gradient(to bottom, rgba(33, 42, 52, 0.95), rgba(33, 42, 52, 0.85)), url(${heroBackground})`,
-        background: "radial-gradient(circle at top, #1e3a8a, #0f172a)",
-        // backgroundImage: `linear-gradient(to bottom right, rgba(204, 255, 204, 0.95), rgba(224, 255, 229, 0.9), rgba(230, 250, 255, 0.8))`,
+          // backgroundImage: `linear-gradient(to bottom, rgba(33, 42, 52, 0.95), rgba(33, 42, 52, 0.85)), url(${heroBackground})`,
+          background: "radial-gradient(circle at top, #1e3a8a, #0f172a)",
+          // backgroundImage: `linear-gradient(to bottom right, rgba(204, 255, 204, 0.95), rgba(224, 255, 229, 0.9), rgba(230, 250, 255, 0.8))`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
-      {/* Falling shooting stars */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
-        {[...Array(3)].map((_, i) => (
-          <div
-            key={i}
-            className="shooting-star"
-            style={{
-              left: `${10 + Math.random() * 80}%`, // horizontal spread
-              top: `${-50 + Math.random() * 50}px`, // slightly above the hero section
-              animationDuration: `${1.5 + Math.random() * 1.5}s`,
-              animationDelay: `${i * 1.5}s`,
-            }}
-          />
-        ))}
-      </div>
+        {/* Falling shooting stars */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
+          {[...Array(3)].map((_, i) => (
+            <div
+              key={i}
+              className="shooting-star"
+              style={{
+                left: `${10 + Math.random() * 80}%`, // horizontal spread
+                top: `${-50 + Math.random() * 50}px`, // slightly above the hero section
+                animationDuration: `${1.5 + Math.random() * 1.5}s`,
+                animationDelay: `${i * 1.5}s`,
+              }}
+            />
+          ))}
+        </div>
 
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background pointer-events-none" />
-        
+
         <div className="container mx-auto px-4 py-20 relative z-10">
           <div className="max-w-5xl mx-auto text-center">
             {/* SBUHACKS Badge */}
@@ -50,16 +50,16 @@ const Index = () => {
             {/* Main Heading */}
             <h1 className="text-6xl md:text-8xl font-black mb-6 tracking-tight">
               <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-                Professor QuAick
+                Professor QuAIck
               </span>
             </h1>
-            
+
             <p className="text-xl md:text-2xl text-foreground/90 mb-4 max-w-3xl mx-auto leading-relaxed">
               Transform Your Lecture Notes Into Interactive Lesson
             </p>
-            
+
             <p className="text-md md:text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Learn with Prof. QuAIck by uploading your notes and turning them into interactive video lessons that help you understand faster, study smarter, and ace your next midterm!
+              Learn with Prof. QuAIck by uploading your notes and turning them into interactive video lessons that help you understand faster, study smarter, and ace your next midterm!
             </p>
 
             {/* CTA Buttons */}
@@ -73,7 +73,7 @@ const Index = () => {
                 Start Learning Now
                 <ArrowRight className="ml-2" />
               </Button>
-              
+
               <Button
                 variant="outline"
                 size="lg"
@@ -86,25 +86,25 @@ const Index = () => {
 
             {/* Mascot */}
             <div className="flex justify-center">
-              <img 
-                src={professorMascot} 
-                alt="AI Professor Mascot" 
+              <img
+                src={professorMascot}
+                alt="AI Professor Mascot"
                 className="w-48 h-48 md:w-64 md:h-64 drop-shadow-2xl animate-bounce"
                 style={{ animationDuration: '3s' }}
               />
             </div>
-             <div className="absolute bottom-10 w-full overflow-hidden">
+            <div className="absolute bottom-10 w-full overflow-hidden">
               <div className="flex animate-duckTrain space-x-8">
-             {Array.from({ length: 15 }).map((_, i) => (
-              <img
-              key={i}
-              src={duckImage}
-              alt="Duck"
-              className="w-16 h-16 md:w-20 md:h-20"
-            />
-          ))}
-        </div>
-      </div>
+                {Array.from({ length: 15 }).map((_, i) => (
+                  <img
+                    key={i}
+                    src={duckImage}
+                    alt="Duck"
+                    className="w-16 h-16 md:w-20 md:h-20"
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -116,7 +116,7 @@ const Index = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
             How It <span className="text-primary">Works</span>
           </h2>
-          
+
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <div className="bg-card p-8 rounded-2xl border border-border hover:border-primary/50 transition-all hover:shadow-glow">
               <div className="w-16 h-16 bg-primary/20 rounded-xl flex items-center justify-center mb-6">
