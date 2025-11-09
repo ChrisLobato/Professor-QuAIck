@@ -5,7 +5,9 @@ Make sure you have:  pip install PyMuPDF
 """
 
 import fitz  
-from moviepy import VideoFileClip, concatenate_videoclips
+from moviepy.editor import VideoFileClip, concatenate_videoclips, ImageClip, CompositeVideoClip
+
+import os
 
 def extract_text_and_images(pdf_path):
     text_from_pdf = ""
@@ -42,9 +44,16 @@ def extract_text_and_images(pdf_path):
     print("\n Extraction complete!")
     return text_from_pdf, images_from_pdf
 
-def combine_videos(video_files, output_filename = "final_video.mp4"):
-    clips = [VideoFileClip(f) for f in video_files]
+def combine_videos(video_files, output_path="videos/final_combined.mp4"):
+    video_files = [vf for vf in video_files if os.path.exists(vf)]
+
+    if not video_files:
+        print("⚠️ No video clips found to combine.")
+        return None  # prevents crash
+
+    clips = [VideoFileClip(vf) for vf in video_files]
     final_clip = concatenate_videoclips(clips)
-    final_clip.write_videofile(output_filename, codec="libx264", audio_codec="aac")
-    print(f"Combined video saved as {output_filename}")
-    return output_filename
+    final_clip.write_videofile(output_path, codec="libx264", audio_codec="aac")
+    print(f"✅ Combined {len(clips)} clips → {output_path}")
+    return output_path
+
