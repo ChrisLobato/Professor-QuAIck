@@ -121,7 +121,7 @@ const Lecturer = () => {
       <header className="border-b border-border/50 bg-card/30 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src={professorMascot} alt="Professor" className="w-12 h-12" />
+            <img src={professorMascot} alt="Professor" className="w-12 h-12"/>
             <h1 className="text-2xl font-bold">
               Prof.Qu<span className="text-primary">AI</span>ck
             </h1>

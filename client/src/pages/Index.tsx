@@ -90,7 +90,7 @@ const Index = () => {
                 src={professorMascot}
                 alt="AI Professor Mascot"
                 className="w-48 h-48 md:w-64 md:h-64 drop-shadow-2xl animate-bounce"
-                style={{ animationDuration: '3s' }}
+                style={{height:"25%" ,width: "25%", animationDuration: '3s' }}
               />
             </div>
             <div className="absolute bottom-10 w-full overflow-hidden">
