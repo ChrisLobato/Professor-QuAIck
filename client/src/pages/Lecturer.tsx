@@ -350,14 +350,35 @@ const Lecturer = () => {
             }}>
               Create Another
             </Button>
-            <Button variant="hero" onClick={() => {
-              const a = document.createElement('a');
-              a.href = generatedVideoUrl;
-              a.download = 'ai-lecture.mp4';
-              a.click();
-            }}>
+            <Button
+              variant="hero"
+              onClick={async () => {
+                if (!generatedVideoUrl) return;
+
+                try {
+                  const response = await fetch(generatedVideoUrl, { mode: "cors" });
+                  if (!response.ok) throw new Error("Failed to fetch video");
+
+                  const blob = await response.blob();
+                  const url = window.URL.createObjectURL(blob);
+
+                  const a = document.createElement("a");
+                  a.href = url;
+                  a.download = "ai-lecture.mp4";
+                  document.body.appendChild(a);
+                  a.click();
+                  document.body.removeChild(a);
+
+                  window.URL.revokeObjectURL(url);
+                } catch (err) {
+                  console.error("Download failed:", err);
+                  alert("Download failed. Check console for details.");
+                }
+              }}
+            >
               Download Video
             </Button>
+
           </div>
         </DialogContent>
       </Dialog>
