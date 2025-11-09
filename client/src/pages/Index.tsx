@@ -73,7 +73,7 @@ const Index = () => {
                 Start Learning Now
                 <ArrowRight className="ml-2" />
               </Button>
-
+              <a href="#learn-more-section">
               <Button
                 variant="outline"
                 size="lg"
@@ -82,6 +82,7 @@ const Index = () => {
                 <BookOpen className="mr-2" />
                 Learn More
               </Button>
+              </a>
             </div>
 
             {/* Mascot */}
@@ -90,7 +91,7 @@ const Index = () => {
                 src={professorMascot}
                 alt="AI Professor Mascot"
                 className="w-48 h-48 md:w-64 md:h-64 drop-shadow-2xl animate-bounce"
-                style={{height:"25%" ,width: "25%", animationDuration: '3s' }}
+                style={{height:"25%" ,width: "25%", animationDuration: '3s', paddingBottom: 35}}
               />
             </div>
             <div className="absolute bottom-10 w-full overflow-hidden">
@@ -100,7 +101,7 @@ const Index = () => {
                     key={i}
                     src={duckImage}
                     alt="Duck"
-                    className="w-16 h-16 md:w-20 md:h-20"
+                    className="w-16 h-16 md:w-20 md:h-20"              
                   />
                 ))}
               </div>
@@ -111,7 +112,7 @@ const Index = () => {
 
 
       {/* Features Section */}
-      <section className="py-24 bg-card/30">
+      <section className="py-24 bg-card/30" id="learn-more-section">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
             How It <span className="text-primary">Works</span>

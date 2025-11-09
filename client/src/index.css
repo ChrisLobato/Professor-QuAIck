@@ -130,3 +130,6 @@ All colors MUST be HSL.
   animation: shooting-star-fall linear infinite;
 }
 
+html {
+  scroll-behavior: smooth;
+}
