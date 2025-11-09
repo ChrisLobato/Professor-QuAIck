@@ -82,8 +82,8 @@ def generate_video():
         video_files = []
 
         for i, seg in enumerate(segments, 1):
-            if i == 2:  # limit to 4 short clips max
-                break
+            # if i == 2:  # limit to 4 short clips max
+            #     break
 
             text_segment = seg.get("segment", "").strip()
             if not text_segment:
